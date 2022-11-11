@@ -1,0 +1,45 @@
+﻿@page "/toplist"
+
+<PageTitle>Top List</PageTitle>
+
+@using BlazorApp.Data
+@inject IKitKatService KitKatService
+
+<h1>Top KitKat eaters in the world!</h1>
+
+<p>If think you are better than anyone in the list.</p>
+
+@if (KitKatService.KitKatEaters == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Number of units / year</th>
+            </tr>
+        </thead>
+        <tbody>
+         
+        @foreach (var eater in KitKatService.KitKatEaters)
+        {
+            <tr>
+                <td>1</td>
+                <td>@eater.Name</td>
+                <td>@eater.NumberOfUnitPerYear</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await KitKatService.LoadKitKatEaters();
+    }
+}
