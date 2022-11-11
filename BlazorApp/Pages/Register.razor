@@ -1,5 +1,6 @@
 ﻿@page "/register"
 @using BlazorApp.Data;
+@inject IKitKatService KitKatService;
 
 <PageTitle>Register</PageTitle>
 
@@ -38,8 +39,8 @@
         base.OnAfterRender(firstRender);
     }
 
-    private void HandleValidSubmit()
+    async Task HandleValidSubmit()
     {
-        // Process the valid form
+        await KitKatService.Create(kitKatEater);
     }
 }
